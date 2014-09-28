@@ -1,1 +1,9 @@
 /* Empty. Add your own CSS if you like */
+.top-number-input {
+  height: 50px;
+}
+
+.top-number-input-button {
+  height: 50px;
+  width: 50px;
+}
