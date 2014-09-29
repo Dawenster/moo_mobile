@@ -15,3 +15,17 @@
 .attempts-header-row {
   font-weight: bold;
 }
+
+.settings-item-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.setting-repeat-numbers {
+  border: none;
+  margin-top: 10px;
+}
+
+.settings-number-digits {
+  margin: 15px;
+}
