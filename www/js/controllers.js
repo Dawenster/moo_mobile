@@ -13,8 +13,10 @@ app.controller('PlayCtrl', function($scope, Answer) {
   }
 });
 
+app.controller('RulesCtrl', function($scope) {
+})
+
 app.controller('SettingsCtrl', function($scope) {
-  $scope.user = {username: "Dawenster"}
 })
 
 app.controller('HistoryCtrl', function($scope) {
