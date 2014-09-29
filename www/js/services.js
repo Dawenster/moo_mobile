@@ -53,8 +53,28 @@ app.factory("Answer", function() {
   return Answer
 });
 
+app.factory("Digits", function() {
+  var Digits = {
+    1: "Your cat could do this",
+    2: "Don't wanna think huh?",
+    3: "Easy peasy",
+    4: "Normal",
+    5: "Keener",
+    6: "Respect, yo!",
+    7: "Ok, you're a computer aren't you"
+  };
+  
+  return Digits
+});
 
-
+app.factory("Repeat", function() {
+  var Repeat = {
+    true: "True: This means digits can repeat, like 1122. This makes the game more challenging.",
+    false: "False: This means digits cannot repeat, like 1234."
+  };
+  
+  return Repeat
+});
 
 
 

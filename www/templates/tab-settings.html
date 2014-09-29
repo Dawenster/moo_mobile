@@ -1,25 +1,33 @@
 <ion-view title="Settings">
   <ion-content class="padding">
-    <div class="settings-item-title settings-number-digits">
-      Number of digits
-    </div>
-    <div class="range">
-      1
-      <input type="range" name="volume" min="1" max="7" value="4">
-      7
-    </div>
-    <ul class="list">
-      <li class="item item-toggle setting-repeat-numbers">
-        <div class="settings-item-title">
-          Repeat numbers
-        </div>
-        <label class="toggle toggle-assertive">
-          <input type="checkbox">
-          <div class="track">
-            <div class="handle"></div>
+    <div ng-controller="SettingsCtrl">
+      <div class="settings-item-title settings-number-digits">
+        Number of digits
+      </div>
+      <div class="range">
+        1
+        <input type="range" name="volume" min="1" max="7" value="4" ng-model="data.digit">
+        7
+      </div>
+      <p class="settings-number-sentence">
+        {{data.digit + ": " + sentence}}
+      </p>
+      <ul class="list">
+        <li class="item item-toggle setting-repeat-numbers">
+          <div class="settings-item-title">
+            Repeat numbers
           </div>
-        </label>
-      </li>
-    </ul>
+          <label class="toggle toggle-assertive">
+            <input type="checkbox" ng-model="data.repeat">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+      </ul>
+      <p class="settings-number-sentence">
+        {{repeat}}
+      </p>
+    </div>
   </ion-content>
 </ion-view>
