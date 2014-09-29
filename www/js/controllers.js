@@ -16,7 +16,16 @@ app.controller('PlayCtrl', function($scope, Answer) {
 app.controller('RulesCtrl', function($scope) {
 })
 
-app.controller('SettingsCtrl', function($scope) {
+app.controller('SettingsCtrl', function($scope, Digits, Repeat) {
+  $scope.data = {digit: 4, repeat: false}
+
+  $scope.$watch('data.digit', function(newValue, oldValue) {
+    $scope.sentence = Digits[newValue];
+  });
+
+  $scope.$watch('data.repeat', function(newValue, oldValue) {
+    $scope.repeat = Repeat[newValue];
+  });
 })
 
 app.controller('HistoryCtrl', function($scope) {
