@@ -11,7 +11,7 @@ app.factory("Answer", function() {
 
   Answer.check = function(attempt) {
     console.log(ans);
-    if (ans == attempt) {
+    if (ans === attempt) {
       return "You win!";
     } else {
       return provideFeedback(ans, attempt);
@@ -22,7 +22,7 @@ app.factory("Answer", function() {
     var letters = "";
 
     splitAnswers = answer.toString().split("");
-    splitAttempt = attempt.split("");
+    splitAttempt = attempt.toString().split("");
 
     for (var i = 0; i < splitAttempt.length; i++) {
       letters += determineLetter(splitAttempt[i], splitAnswers, i);
