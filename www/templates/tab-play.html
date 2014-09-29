@@ -2,18 +2,42 @@
   <ion-content class="padding">
     <div ng-controller="PlayCtrl">
       
-      <div class="list">
+      <div class="top-of-play">
 
-      <div class="item-input-inset">
-        <label class="item-input-wrapper top-number-input">
-          <input type="text" ng-model="answer.attempt" placeholder="Enter guess">
-        </label>
-        <button class="button button-small top-number-input-button" ng-click="checkAnswer(answer.attempt)">
-          <i class="icon ion-checkmark-circled input-check-button"></i>
-        </button>
+        <div class="item-input-inset">
+          <label class="item-input-wrapper top-number-input">
+            <input type="text" ng-model="answer.attempt" placeholder="Enter guess">
+          </label>
+          <button class="button button-small top-number-input-button" ng-click="checkAnswer(answer.attempt)">
+            <i class="icon ion-checkmark-circled input-check-button"></i>
+          </button>
+        </div>
+
       </div>
 
+      <div class="row attempts-header-row">
+        <div class="col col-10 col-offset-25">
+          #
+        </div>
+        <div class="col col-20">
+          Guess
+        </div>
+        <div class="col col-20">
+          Result
+        </div>
+      </div>
+
+      <div class="row" ng-repeat="attempt in attempts">
+        <div class="col col-10 col-offset-25">
+          {{$index + 1}}
+        </div>
+        <div class="col col-20">
+          {{attempt.guess}}
+        </div>
+        <div class="col col-20">
+          {{attempt.result}}
+        </div>
+      </div>
     </div>
-  </div>
   </ion-content>
 </ion-view>

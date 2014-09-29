@@ -3,7 +3,7 @@ var app = angular.module('starter.services', []);
 /**
  * A simple example service that returns some data.
  */
-app.factory('Answer', function() {
+app.factory("Answer", function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -14,23 +14,23 @@ app.factory('Answer', function() {
 
   Answer.check = function(attempt) {
     if (answer == attempt) {
-      return "Congrats!";
+      return "You win!";
     } else {
       return provideFeedback(answer, attempt);
     }
   }
   
   var provideFeedback = function(answer, attempt) {
-    var feedback = "";
+    var letters = "";
 
     splitAnswers = answer.toString().split("");
     splitAttempt = attempt.split("");
 
     for (var i = 0; i < splitAttempt.length; i++) {
-      feedback += determineLetter(splitAttempt[i], splitAnswers, i);
+      letters += determineLetter(splitAttempt[i], splitAnswers, i);
     };
 
-    return feedback;
+    return countLetters(letters);
   }
 
   var determineLetter = function(letter, splitAnswers, letterIndex) {
@@ -42,10 +42,33 @@ app.factory('Answer', function() {
       } else {
         return "B";
       }
-    } else {
-      return "";
     }
+  }
+
+  var countLetters = function(letters) {
+    var countA = (letters.match(/A/g) || []).length + "A";
+    var countB = (letters.match(/B/g) || []).length + "B";
+
+    return countA + " " + countB;
   }
 
   return Answer
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

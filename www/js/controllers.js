@@ -1,8 +1,15 @@
 var app = angular.module('starter.controllers', []);
 
 app.controller('PlayCtrl', function($scope, Answer) {
+  $scope.attempts = []
+
   $scope.checkAnswer = function(attempt) {
-    console.log(Answer.check(attempt));
+    var feedback = Answer.check(attempt);
+    $scope.addAttempt(attempt, feedback);
+  }
+
+  $scope.addAttempt = function(guess, result) {
+    $scope.attempts.push({guess: guess, result: result});
   }
 });
 

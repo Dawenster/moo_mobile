@@ -1,4 +1,8 @@
 /* Empty. Add your own CSS if you like */
+.top-of-play {
+  /*position: fixed;*/
+}
+
 .top-number-input {
   height: 50px;
 }
@@ -6,4 +10,8 @@
 .top-number-input-button {
   height: 50px;
   width: 50px;
+}
+
+.attempts-header-row {
+  font-weight: bold;
 }
