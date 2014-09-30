@@ -6,11 +6,11 @@ var app = angular.module('starter.services', []);
 app.factory("Answer", function() {
   var Answer = {};
   var ans = Math.floor(Math.random()*9000) + 1000;
+  console.log(ans);
 
   // Might use a resource here that returns a JSON array
 
   Answer.check = function(attempt) {
-    console.log(ans);
     if (ans === attempt) {
       return "You win!";
     } else {

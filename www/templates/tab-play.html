@@ -1,41 +1,53 @@
 <ion-view title="Play">
   <ion-content class="padding">
     <div ng-controller="PlayCtrl">
-      
-      <div class="top-of-play">
-
-        <div class="item-input-inset">
-          <label class="item-input-wrapper top-number-input">
-            <input type="number" ng-model="answer.attempt" placeholder="Enter guess">
-          </label>
-          <button class="button button-small top-number-input-button" ng-click="checkAnswer(answer.attempt)">
-            <i class="icon ion-checkmark-circled input-check-button"></i>
-          </button>
-        </div>
-
+      <div class="first-time-start-holder" ng-show="!showDetails">
+        <h1>
+          ABAB
+        </h1>
+        <p>
+          Hello! Hope you enjoy this game :)
+        </p>
+        <button class="button button-full button-positive" ng-click="startGame()">
+          Start the game
+        </button>
       </div>
+      <div class="play-holder" ng-show="showDetails">
+        <div class="top-of-play">
 
-      <div class="row attempts-header-row">
-        <div class="col col-10 col-offset-25">
-          #
-        </div>
-        <div class="col col-20">
-          Guess
-        </div>
-        <div class="col col-20">
-          Result
-        </div>
-      </div>
+          <div class="item-input-inset">
+            <label class="item-input-wrapper top-number-input">
+              <input type="number" ng-model="answer.attempt" placeholder="Enter guess">
+            </label>
+            <button class="button button-small top-number-input-button" ng-click="checkAnswer(answer.attempt)">
+              <i class="icon ion-checkmark-circled input-check-button"></i>
+            </button>
+          </div>
 
-      <div class="row" ng-repeat="attempt in attempts">
-        <div class="col col-10 col-offset-25">
-          {{$index + 1}}
         </div>
-        <div class="col col-20">
-          {{attempt.guess}}
+
+        <div class="row attempts-header-row">
+          <div class="col col-10 col-offset-20">
+            #
+          </div>
+          <div class="col col-30">
+            Guess
+          </div>
+          <div class="col col-15">
+            Result
+          </div>
         </div>
-        <div class="col col-20">
-          {{attempt.result}}
+
+        <div class="row" ng-repeat="attempt in attempts">
+          <div class="col col-10 col-offset-20">
+            {{$index + 1}}
+          </div>
+          <div class="col col-30">
+            {{attempt.guess}}
+          </div>
+          <div class="col col-15">
+            {{attempt.result}}
+          </div>
         </div>
       </div>
     </div>

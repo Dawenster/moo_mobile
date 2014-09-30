@@ -1,7 +1,7 @@
 var app = angular.module('starter.controllers', []);
 
-app.controller('PlayCtrl', function($scope, Answer) {
-  $scope.attempts = []
+app.controller('PlayCtrl', function($scope, $rootScope, Answer) {
+  $scope.showDetails = $rootScope.started;
 
   $scope.checkAnswer = function(attempt) {
     var feedback = Answer.check(attempt);
@@ -9,7 +9,25 @@ app.controller('PlayCtrl', function($scope, Answer) {
   }
 
   $scope.addAttempt = function(guess, result) {
-    $scope.attempts.push({guess: guess, result: result});
+    $rootScope.attempts.push({guess: guess, result: result});
+  }
+
+  $scope.setDigits = function(digits) {
+
+  }
+
+  $scope.setRepeat = function(repeat) {
+    
+  }
+
+  $scope.startGame = function() {
+    $scope.showDetails = !$scope.showDetails;
+    console.log("Let the games begin!")
+    $rootScope.started = true;
+  }
+
+  $scope.restartGame = function(digits) {
+    
   }
 });
 
