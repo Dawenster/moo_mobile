@@ -23,7 +23,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($rootScope) {
   $rootScope.started = false;
-  $rootScope.attempts = [];
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

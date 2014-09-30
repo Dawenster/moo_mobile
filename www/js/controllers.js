@@ -1,7 +1,8 @@
 var app = angular.module('starter.controllers', []);
 
-app.controller('PlayCtrl', function($scope, $rootScope, Answer) {
+app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, Answer) {
   $scope.showDetails = $rootScope.started;
+  $scope.attempts = JSON.parse($localstorage.get('attempts'));
 
   $scope.checkAnswer = function(attempt) {
     var feedback = Answer.check(attempt);
@@ -9,7 +10,10 @@ app.controller('PlayCtrl', function($scope, $rootScope, Answer) {
   }
 
   $scope.addAttempt = function(guess, result) {
-    $rootScope.attempts.push({guess: guess, result: result});
+    var attempts = JSON.parse($localstorage.get('attempts'));
+    attempts.push({guess: guess, result: result});
+    $localstorage.set('attempts', JSON.stringify(attempts));
+    $scope.attempts = attempts;
   }
 
   $scope.setDigits = function(digits) {
@@ -21,13 +25,14 @@ app.controller('PlayCtrl', function($scope, $rootScope, Answer) {
   }
 
   $scope.startGame = function() {
-    $scope.showDetails = !$scope.showDetails;
     console.log("Let the games begin!")
+
     $rootScope.started = true;
+    $scope.showDetails = !$scope.showDetails;
   }
 
   $scope.restartGame = function(digits) {
-    
+    $localstorage.set('attempts', JSON.stringify([]));
   }
 });
 
