@@ -5,9 +5,18 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, Answer) {
   $scope.attempts = JSON.parse($localstorage.get('attempts'));
   $scope.max = JSON.parse($localstorage.get('data')).digit;
 
+  $scope.startGame = function() {
+    $rootScope.started = true;
+    $scope.showDetails = !$scope.showDetails;
+    Answer.generate();
+  }
+
   $scope.checkAnswer = function(attempt) {
     var feedback = Answer.check(attempt);
     $scope.addAttempt(attempt, feedback);
+    if (feedback == "You win!") {
+      showAnswer();
+    }
   }
 
   $scope.addAttempt = function(guess, result) {
@@ -17,12 +26,19 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, Answer) {
     $scope.attempts = attempts;
   }
 
-  $scope.startGame = function() {
-    console.log("Let the games begin!")
+  $scope.giveUp = function() {
+    showAnswer();
+  }
 
-    $rootScope.started = true;
-    $scope.showDetails = !$scope.showDetails;
-    Answer.generate();
+  var showAnswer = function() {
+    $scope.showRestart = !$scope.showRestart;
+    $scope.finalAnswer = JSON.parse($localstorage.get('ans'));
+  }
+
+  $scope.restartGame = function() {
+    $scope.showRestart = !$scope.showRestart;
+    $rootScope.newGame();
+    $scope.attempts = JSON.parse($localstorage.get('attempts'));
   }
 });
 
@@ -50,7 +66,7 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
 
   var updateAndRestart = function(data) {
     $localstorage.set('data', JSON.stringify(data));
-    $rootScope.restartGame();
+    $rootScope.newGame();
   }
 })
 

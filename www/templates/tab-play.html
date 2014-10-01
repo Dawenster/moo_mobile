@@ -49,6 +49,21 @@
             {{attempt.result}}
           </div>
         </div>
+
+        <div class="give-up-holder">
+          <button class="button button-calm button-small icon ion-sad" ng-click="giveUp()" ng-show="!showRestart">
+            Give up
+          </button>
+        </div>
+
+        <div class="bottom-of-play" ng-show="showRestart">
+          <p>
+            {{"Answer: " + finalAnswer}}
+          </p>
+          <button class="button button-positive icon ion-refresh" ng-click="restartGame()">
+            Retry
+          </button>
+        </div>
       </div>
     </div>
   </ion-content>

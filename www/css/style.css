@@ -29,3 +29,12 @@
 .settings-number-digits, .settings-number-sentence {
   margin: 15px;
 }
+
+.give-up-holder {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.bottom-of-play {
+  text-align: center;
+}

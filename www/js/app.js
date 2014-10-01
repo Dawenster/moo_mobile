@@ -29,7 +29,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   }
   $localstorage.set('data', JSON.stringify(initialSettings));
 
-  $rootScope.restartGame = function(digits) {
+  $rootScope.newGame = function() {
     $localstorage.set('attempts', JSON.stringify([]));
     Answer.generate();
   }
