@@ -22,33 +22,30 @@ app.factory("Answer", function($localstorage) {
     };
     var ans = ansArr.join("");
     console.log(ans);
-    $localstorage.set('ans', JSON.stringify(ans));
+    $localstorage.set('ansArr', JSON.stringify(ansArr));
   }
 
   Answer.check = function(attempt) {
-    var ans = JSON.parse($localstorage.get('ans'));
-    if (ans == attempt) {
+    var ansArr = JSON.parse($localstorage.get('ansArr'));
+    if (ansArr == attempt) {
       return "You win!";
     } else {
-      return provideFeedback(ans, attempt);
+      return provideFeedback(ansArr, attempt);
     }
   }
   
   var provideFeedback = function(answer, attempt) {
     var letters = "";
 
-    splitAnswers = answer.toString().split("");
-    splitAttempt = attempt.toString().split("");
-
-    for (var i = 0; i < splitAttempt.length; i++) {
-      letters += determineLetter(splitAttempt[i], splitAnswers, i);
+    for (var i = 0; i < attempt.length; i++) {
+      letters += determineLetter(attempt[i], answer, i);
     };
 
     return countLetters(letters);
   }
 
-  var determineLetter = function(letter, splitAnswers, letterIndex) {
-    var foundIndex = splitAnswers.indexOf(letter)
+  var determineLetter = function(letter, answer, letterIndex) {
+    var foundIndex = answer.indexOf(letter)
 
     if (foundIndex > -1) {
       if (foundIndex == letterIndex) {

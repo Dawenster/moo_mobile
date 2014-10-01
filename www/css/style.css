@@ -3,17 +3,20 @@
   /*position: fixed;*/
 }
 
-.top-number-input {
-  height: 50px;
+.buttons-holder {
+  text-align: center;
+}
+
+.guess-button {
+  width: 33%;
+  margin: 10px 0px;
 }
 
 .number-input {
   font-size: 20px !important;
-}
-
-.top-number-input-button {
-  height: 50px;
-  width: 50px;
+  background-color: #eee;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .attempts-header-row {
@@ -32,11 +35,6 @@
 
 .settings-number-digits, .settings-number-sentence {
   margin: 15px;
-}
-
-.give-up-holder {
-  text-align: center;
-  margin-top: 15px;
 }
 
 .bottom-of-play {

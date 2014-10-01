@@ -8,22 +8,28 @@
         <p>
           Hello! Hope you enjoy this game :)
         </p>
-        <button class="button button-full button-positive" ng-click="startGame()">
+        <button class="button button-full button-energized" ng-click="startGame()">
           Start the game
         </button>
       </div>
       <div class="play-holder" ng-show="showDetails">
         <div class="top-of-play">
+          <div class="row">
+            <div class="col" ng-repeat="num in maxNumbers">
+              <input class="number-input" type="number" data-index="{{num.index}}">
+            </div>
+          </div>
+        </div>
 
-          <div class="item-input-inset">
-            <label class="item-input-wrapper top-number-input">
-              <input class="number-input" type="number" ng-model="answer.attempt" ng-maxlength="{{max}}">
-            </label>
-            <button class="button button-small top-number-input-button" ng-click="checkAnswer(answer.attempt)">
-              <i class="icon ion-checkmark-circled input-check-button"></i>
+        <div class="buttons-holder">
+          <button class="button button-small button-energized guess-button" ng-click="checkAnswer()">
+            Guess
+          </button>
+          <div>
+            <button class="button button-clear button-assertive button-small give-up-button" ng-click="showConfirm()" ng-show="!showRestart">
+              Give up
             </button>
           </div>
-
         </div>
 
         <div class="row attempts-header-row">
@@ -48,12 +54,6 @@
           <div class="col col-15">
             {{attempt.result}}
           </div>
-        </div>
-
-        <div class="give-up-holder">
-          <button class="button button-calm button-small icon ion-sad" ng-click="showConfirm()" ng-show="!showRestart">
-            Give up
-          </button>
         </div>
 
         <div class="bottom-of-play" ng-show="showRestart">

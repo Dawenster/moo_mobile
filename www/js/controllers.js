@@ -3,7 +3,17 @@ var app = angular.module('starter.controllers', []);
 app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPopup, Answer) {
   $scope.showDetails = $rootScope.started;
   $scope.attempts = JSON.parse($localstorage.get('attempts'));
-  $scope.max = JSON.parse($localstorage.get('data')).digit;
+
+  var getNumber = function() {
+    var max = JSON.parse($localstorage.get('data')).digit;
+    var arr = [];
+    for (var i = 0; i < max; i++) {
+      arr.push({index: i})
+    };
+    return arr;
+  }
+
+  $scope.maxNumbers = getNumber();
 
   $scope.startGame = function() {
     $rootScope.started = true;
@@ -11,9 +21,16 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     Answer.generate();
   }
 
-  $scope.checkAnswer = function(attempt) {
+  $scope.checkAnswer = function() {
+    var attempt = [];
+    var inputs = document.getElementsByClassName("number-input");
+
+    for (var i = 0; i < inputs.length; i++) {
+      attempt.push(parseInt(inputs[i].value));
+    };
+
     var feedback = Answer.check(attempt);
-    $scope.addAttempt(attempt, feedback);
+    $scope.addAttempt(attempt.join(""), feedback);
     if (feedback == "You win!") {
       showAnswer();
     }
@@ -32,7 +49,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
 
   var showAnswer = function() {
     $scope.showRestart = !$scope.showRestart;
-    $scope.finalAnswer = JSON.parse($localstorage.get('ans'));
+    $scope.finalAnswer = JSON.parse($localstorage.get('ansArr')).join("");
   }
 
   $scope.restartGame = function() {
