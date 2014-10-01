@@ -7,14 +7,27 @@ app.factory("Answer", function($localstorage) {
   var Answer = {};
 
   Answer.generate = function() {
-    var ans = Math.floor(Math.random()*9000) + 1000;
+    var ansArr = []
+    var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    data = JSON.parse($localstorage.get('data'));
+
+    for (var i = 0; i < data.digit; i++) {
+      var randomNumber = numbers[Math.floor(Math.random()*numbers.length)];
+      ansArr.push(randomNumber);
+      if (!data.repeat) {
+        var randomIndex = numbers.indexOf(randomNumber);
+        numbers.splice(randomIndex, 1);
+      }
+    };
+    var ans = ansArr.join("");
     console.log(ans);
     $localstorage.set('ans', JSON.stringify(ans));
   }
 
   Answer.check = function(attempt) {
     var ans = JSON.parse($localstorage.get('ans'));
-    if (ans === attempt) {
+    if (ans == attempt) {
       return "You win!";
     } else {
       return provideFeedback(ans, attempt);
