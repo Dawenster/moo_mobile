@@ -1,6 +1,6 @@
 var app = angular.module('starter.controllers', []);
 
-app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, Answer) {
+app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPopup, Answer) {
   $scope.showDetails = $rootScope.started;
   $scope.attempts = JSON.parse($localstorage.get('attempts'));
   $scope.max = JSON.parse($localstorage.get('data')).digit;
@@ -40,6 +40,20 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, Answer) {
     $rootScope.newGame();
     $scope.attempts = JSON.parse($localstorage.get('attempts'));
   }
+
+  $scope.showConfirm = function() {
+    var confirmPopup = $ionicPopup.confirm({
+      title: "Awww... it's ok",
+      template: "Life is hard. Giving up is easy! Go ahead, we'd love to tell you the answer :)",
+      okText: "I give up...",
+      cancelText: "Never!"
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        $scope.giveUp();
+      }
+    });
+  };
 });
 
 app.controller('RulesCtrl', function($scope) {
