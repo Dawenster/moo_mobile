@@ -3,14 +3,17 @@ var app = angular.module('starter.services', []);
 /**
  * A simple example service that returns some data.
  */
-app.factory("Answer", function() {
+app.factory("Answer", function($localstorage) {
   var Answer = {};
-  var ans = Math.floor(Math.random()*9000) + 1000;
-  console.log(ans);
 
-  // Might use a resource here that returns a JSON array
+  Answer.generate = function() {
+    var ans = Math.floor(Math.random()*9000) + 1000;
+    console.log(ans);
+    $localstorage.set('ans', JSON.stringify(ans));
+  }
 
   Answer.check = function(attempt) {
+    var ans = JSON.parse($localstorage.get('ans'));
     if (ans === attempt) {
       return "You win!";
     } else {

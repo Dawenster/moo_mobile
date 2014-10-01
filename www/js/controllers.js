@@ -16,39 +16,41 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, Answer) {
     $scope.attempts = attempts;
   }
 
-  $scope.setDigits = function(digits) {
-
-  }
-
-  $scope.setRepeat = function(repeat) {
-    
-  }
-
   $scope.startGame = function() {
     console.log("Let the games begin!")
 
     $rootScope.started = true;
     $scope.showDetails = !$scope.showDetails;
-  }
-
-  $scope.restartGame = function(digits) {
-    $localstorage.set('attempts', JSON.stringify([]));
+    Answer.generate();
   }
 });
 
 app.controller('RulesCtrl', function($scope) {
 })
 
-app.controller('SettingsCtrl', function($scope, Digits, Repeat) {
-  $scope.data = {digit: 4, repeat: false}
+app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digits, Repeat) {
+  $scope.data = JSON.parse($localstorage.get('data'));
 
   $scope.$watch('data.digit', function(newValue, oldValue) {
     $scope.sentence = Digits[newValue];
+    if (newValue != oldValue) {
+      $scope.data.digit = newValue;
+      updateAndRestart($scope.data);
+    }
   });
 
   $scope.$watch('data.repeat', function(newValue, oldValue) {
     $scope.repeat = Repeat[newValue];
+    if (newValue != oldValue) {
+      $scope.data.repeat = newValue;
+      updateAndRestart($scope.data);
+    }
   });
+
+  var updateAndRestart = function(data) {
+    $localstorage.set('data', JSON.stringify(data));
+    $rootScope.restartGame();
+  }
 })
 
 app.controller('HistoryCtrl', function($scope) {

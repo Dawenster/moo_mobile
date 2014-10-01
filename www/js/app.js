@@ -21,8 +21,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.run(function($rootScope) {
+.run(function($rootScope, $localstorage, Answer) {
   $rootScope.started = false;
+  var initialSettings = {
+    "digit": 4,
+    "repeat": false
+  }
+  $localstorage.set('data', JSON.stringify(initialSettings));
+
+  $rootScope.restartGame = function(digits) {
+    $localstorage.set('attempts', JSON.stringify([]));
+    Answer.generate();
+  }
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
