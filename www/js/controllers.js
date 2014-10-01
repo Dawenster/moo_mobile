@@ -3,6 +3,7 @@ var app = angular.module('starter.controllers', []);
 app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, Answer) {
   $scope.showDetails = $rootScope.started;
   $scope.attempts = JSON.parse($localstorage.get('attempts'));
+  $scope.max = JSON.parse($localstorage.get('data')).digit;
 
   $scope.checkAnswer = function(attempt) {
     var feedback = Answer.check(attempt);
