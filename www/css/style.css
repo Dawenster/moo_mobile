@@ -7,6 +7,10 @@
   height: 50px;
 }
 
+.number-input {
+  font-size: 20px !important;
+}
+
 .top-number-input-button {
   height: 50px;
   width: 50px;
