@@ -27,7 +27,7 @@ app.factory("Answer", function($localstorage) {
 
   Answer.check = function(attempt) {
     var ansArr = JSON.parse($localstorage.get('ansArr'));
-    if (ansArr == attempt) {
+    if (ansArr.equals(attempt)) {
       return "You win!";
     } else {
       return provideFeedback(ansArr, attempt);
