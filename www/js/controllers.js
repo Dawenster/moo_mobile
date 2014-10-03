@@ -15,12 +15,6 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
 
   $scope.maxNumbers = getNumber();
 
-  $scope.startGame = function() {
-    $rootScope.started = true;
-    $scope.showDetails = !$scope.showDetails;
-    Answer.generate();
-  }
-
   $scope.addNumber = function(index) {
     var numHolder = document.getElementsByClassName('digit-' + index)[0];
     var num = parseInt(numHolder.innerHTML);

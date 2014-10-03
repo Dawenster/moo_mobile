@@ -1,18 +1,7 @@
 <ion-view title="Play">
   <ion-content class="padding">
     <div ng-controller="PlayCtrl">
-      <div class="first-time-start-holder" ng-show="!showDetails">
-        <h1>
-          ABAB
-        </h1>
-        <p>
-          Hello! Hope you enjoy this game :)
-        </p>
-        <button class="button button-full button-energized" ng-click="startGame()">
-          Start the game
-        </button>
-      </div>
-      <div class="play-holder" ng-show="showDetails">
+      <div class="play-holder">
         <div class="top-of-play">
           <div class="row">
             <div class="col attempt-digit-holder" ng-repeat="num in maxNumbers">

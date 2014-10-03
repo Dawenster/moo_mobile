@@ -22,7 +22,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 .run(function($rootScope, $localstorage, Answer) {
-  $rootScope.started = false;
   var initialSettings = {
     "digit": 4,
     "repeat": false
@@ -33,6 +32,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     $localstorage.set('attempts', JSON.stringify([]));
     Answer.generate();
   }
+
+  $rootScope.newGame();
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
