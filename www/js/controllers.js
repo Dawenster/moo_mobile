@@ -21,12 +21,50 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     Answer.generate();
   }
 
+  $scope.addNumber = function(index) {
+    var numHolder = document.getElementsByClassName('digit-' + index)[0];
+    var num = parseInt(numHolder.innerHTML);
+    if (num != 9) {
+      numHolder.innerHTML = num + 1;
+    }
+    if (num + 1 == 9) {
+      addGreyout("add", index);
+    }
+    if (num + 1 == 1) {
+      removeGreyout("subtract", index);
+    }
+  }
+
+  $scope.subtractNumber = function(index) {
+    var numHolder = document.getElementsByClassName('digit-' + index)[0];
+    var num = parseInt(numHolder.innerHTML);
+    if (num != 0) {
+      numHolder.innerHTML = num - 1;
+    }
+    if (num - 1 == 0) {
+      addGreyout("subtract", index);
+    }
+    if (num - 1 == 8) {
+      removeGreyout("add", index);
+    }
+  }
+
+  var addGreyout = function(direction, index) {
+    var icon = document.getElementsByClassName(direction + '-icon-' + index)[0];
+    icon.className += " greyout"
+  }
+
+  var removeGreyout = function(direction, index) {
+    var icon = document.getElementsByClassName(direction + '-icon-' + index)[0];
+    icon.className = icon.className.replace(/\bgreyout\b/,'');
+  }
+
   $scope.checkAnswer = function() {
     var attempt = [];
     var inputs = document.getElementsByClassName("number-input");
 
     for (var i = 0; i < inputs.length; i++) {
-      attempt.push(parseInt(inputs[i].value));
+      attempt.push(parseInt(inputs[i].innerHTML));
     };
 
     var feedback = Answer.check(attempt);

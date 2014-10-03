@@ -1,6 +1,19 @@
 /* Empty. Add your own CSS if you like */
-.top-of-play {
-  /*position: fixed;*/
+.attempt-digit-holder {
+  text-align: center;
+}
+
+.change-number {
+  font-size: 50px;
+  cursor: pointer;
+}
+
+.change-number.greyout{
+  color: lightgrey;
+}
+
+.attempt-digit {
+  font-size: 30px;
 }
 
 .buttons-holder {
@@ -11,13 +24,13 @@
   width: 33%;
   margin: 10px 0px;
 }
-
+/*
 .number-input {
   font-size: 20px !important;
   background-color: #eee;
   text-align: center;
   border-radius: 5px;
-}
+}*/
 
 .attempts-header-row {
   font-weight: bold;

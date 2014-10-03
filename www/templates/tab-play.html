@@ -15,8 +15,13 @@
       <div class="play-holder" ng-show="showDetails">
         <div class="top-of-play">
           <div class="row">
-            <div class="col" ng-repeat="num in maxNumbers">
-              <input class="number-input" type="number" data-index="{{num.index}}">
+            <div class="col attempt-digit-holder" ng-repeat="num in maxNumbers">
+              <i class="icon ion-arrow-up-b change-number add-icon-{{num.index}}" ng-click="addNumber(num.index)"></i>
+              <div class="attempt-digit digit-{{num.index}} number-input">
+                {{num.index + 1}}
+              </div>
+              <!-- <input class="number-input" type="number" data-index="{{num.index}}"> -->
+              <i class="icon ion-arrow-down-b change-number subtract-icon-{{num.index}}" ng-click="subtractNumber(num.index)"></i>
             </div>
           </div>
         </div>
