@@ -24,13 +24,12 @@
   width: 33%;
   margin: 10px 0px;
 }
-/*
-.number-input {
-  font-size: 20px !important;
-  background-color: #eee;
-  text-align: center;
-  border-radius: 5px;
-}*/
+
+.give-up-button {
+  font-style: italic;
+  margin-top: 10px;
+  color: red;
+}
 
 .attempts-header-row {
   font-weight: bold;

@@ -14,13 +14,14 @@
       </div>
 
       <div class="buttons-holder">
-        <button class="button button-small button-energized guess-button" ng-click="checkAnswer()" ng-show="!showRestart">
+        <button class="button button-positive guess-button" ng-click="checkAnswer()" ng-show="!showRestart">
           Guess
         </button>
         <div>
-          <button class="button button-clear button-assertive button-small give-up-button" ng-click="showConfirm()" ng-show="!showRestart">
+          <p class="give-up-button" ng-click="showConfirm()" ng-show="!showRestart">
+            <i class="icon ion-sad"></i>
             Give up
-          </button>
+          </p>
         </div>
       </div>
 
