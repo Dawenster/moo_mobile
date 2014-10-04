@@ -28,8 +28,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     "timer": true
   }
   $localstorage.set('data', JSON.stringify(initialSettings));
+  $localstorage.set('answerShown', JSON.stringify(false));
 
   $rootScope.newGame = function() {
+    $localstorage.set('answerShown', JSON.stringify(false));
     $localstorage.set('attempts', JSON.stringify([]));
     Answer.generate();
     startOffPlayTime();

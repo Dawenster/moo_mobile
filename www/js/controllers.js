@@ -66,6 +66,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     $scope.addAttempt(attempt.join(""), feedback);
 
     if (feedback == "You win!") {
+      endTime();
       showAnswer();
     }
   }
@@ -78,13 +79,20 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
   }
 
   $scope.giveUp = function() {
+    endTime();
     showAnswer();
+  }
+
+  var endTime = function() {
+    var time = new Date() - $rootScope.playTimeStart;
+    $localstorage.set('time', JSON.stringify(time));
   }
 
   var showAnswer = function() {
     $scope.showRestart = !$scope.showRestart;
-    $scope.time = new Date() - $rootScope.playTimeStart;
+    $scope.time = JSON.parse($localstorage.get('time'));
     $scope.finalAnswer = JSON.parse($localstorage.get('ansArr')).join("");
+    $localstorage.set('answerShown', JSON.stringify(true));
   }
 
   $scope.restartGame = function() {
@@ -106,6 +114,11 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
       }
     });
   };
+
+  var answerShown = JSON.parse($localstorage.get('answerShown'));
+  if (answerShown) {
+    showAnswer();
+  }
 });
 
 app.controller('RulesCtrl', function($scope) {
