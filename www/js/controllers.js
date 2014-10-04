@@ -43,6 +43,20 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     }
   }
 
+  var startTimer = function (){
+    $scope.$broadcast('timer-start');
+    $scope.timerRunning = true;
+  };
+
+  var stopTimer = function (){
+    $scope.$broadcast('timer-stop');
+    $scope.timerRunning = false;
+  };
+
+  $scope.$on('timer-stopped', function (event, data){
+    console.log('Timer Stopped - data = ', data);
+  });
+
   var addGreyout = function(direction, index) {
     var icon = document.getElementsByClassName(direction + '-icon-' + index)[0];
     icon.className += " greyout"
@@ -53,7 +67,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     icon.className = icon.className.replace(/\bgreyout\b/,'');
   }
 
-  $scope.checkAnswer = function() {
+  $scope.checkAnswer = function() {    
     var attempt = [];
     var inputs = document.getElementsByClassName("number-input");
 
@@ -62,8 +76,11 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     };
 
     var feedback = Answer.check(attempt);
+    
     $scope.addAttempt(attempt.join(""), feedback);
+
     if (feedback == "You win!") {
+      stopTimer();
       showAnswer();
     }
   }
@@ -87,6 +104,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
   $scope.restartGame = function() {
     $scope.showRestart = !$scope.showRestart;
     $rootScope.newGame();
+    startTimer();
     $scope.attempts = JSON.parse($localstorage.get('attempts'));
   }
 
@@ -103,6 +121,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
       }
     });
   };
+
 });
 
 app.controller('RulesCtrl', function($scope) {
