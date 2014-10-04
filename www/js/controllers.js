@@ -3,6 +3,8 @@ var app = angular.module('starter.controllers', []);
 app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPopup, Answer) {
   $scope.attempts = JSON.parse($localstorage.get('attempts'));
   $scope.currentTimeElapsed = $rootScope.playTimeStart;
+  $scope.holdingAdd = {}
+  $scope.holdingSubtract = {}
 
   var getNumber = function() {
     var max = JSON.parse($localstorage.get('data')).digit;
@@ -15,7 +17,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
 
   $scope.maxNumbers = getNumber();
 
-  $scope.addNumber = function(index) {
+  var executeAdd = function(index) {
     var numHolder = document.getElementsByClassName('digit-' + index)[0];
     var num = parseInt(numHolder.innerHTML);
     if (num == 9) {
@@ -23,12 +25,9 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     } else {
       numHolder.innerHTML = num + 1;
     }
-    if (num + 1 == 1) {
-      removeGreyout("subtract", index);
-    }
   }
 
-  $scope.subtractNumber = function(index) {
+  var executeSubtract = function(index) {
     var numHolder = document.getElementsByClassName('digit-' + index)[0];
     var num = parseInt(numHolder.innerHTML);
     if (num == 0) {
@@ -36,9 +35,40 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     } else {
       numHolder.innerHTML = num - 1;
     }
-    if (num - 1 == 8) {
-      removeGreyout("add", index);
-    }
+  }
+
+  $scope.addNumberFromHold = function(index) {
+    $scope.holdingAdd[index] = true;
+    window.setInterval(function(){
+      if ($scope.holdingAdd[index]) {
+        executeAdd(index);
+      }
+    }, 200);
+  }
+
+  $scope.releaseAddHold = function(index) {
+    $scope.holdingAdd[index] = false;
+  }
+
+  $scope.addNumber = function(index) {
+    executeAdd(index);
+  }
+
+  $scope.subtractNumberFromHold = function(index) {
+    $scope.holdingSubtract[index] = true;
+    window.setInterval(function(){
+      if ($scope.holdingSubtract[index]) {
+        executeSubtract(index);
+      }
+    }, 200);
+  }
+
+  $scope.releaseSubtractHold = function(index) {
+    $scope.holdingSubtract[index] = false;
+  }
+
+  $scope.subtractNumber = function(index) {
+    executeSubtract(index);
   }
 
   var addGreyout = function(direction, index) {

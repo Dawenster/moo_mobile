@@ -4,11 +4,11 @@
       <div class="top-of-play">
         <div class="row">
           <div class="col attempt-digit-holder" ng-repeat="num in maxNumbers">
-            <i class="icon ion-arrow-up-b change-number add-icon-{{num.index}}" ng-click="addNumber(num.index)"></i>
+            <i class="icon ion-arrow-up-b change-number add-icon-{{num.index}}" on-hold="addNumberFromHold(num.index)" on-release="releaseAddHold(num.index)" ng-click="addNumber(num.index)"></i>
             <div class="attempt-digit digit-{{num.index}} number-input">
               {{num.index + 1}}
             </div>
-            <i class="icon ion-arrow-down-b change-number subtract-icon-{{num.index}}" ng-click="subtractNumber(num.index)"></i>
+            <i class="icon ion-arrow-down-b change-number subtract-icon-{{num.index}}" on-hold="subtractNumberFromHold(num.index)" on-release="releaseSubtractHold(num.index)" ng-click="subtractNumber(num.index)"></i>
           </div>
         </div>
       </div>
