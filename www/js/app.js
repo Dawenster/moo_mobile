@@ -32,6 +32,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $rootScope.newGame = function() {
     $localstorage.set('attempts', JSON.stringify([]));
     Answer.generate();
+    startOffPlayTime();
+  }
+
+  var startOffPlayTime = function() {
+    $rootScope.playTimeStart = new Date();
   }
 
   $rootScope.newGame();

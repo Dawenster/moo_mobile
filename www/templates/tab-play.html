@@ -1,66 +1,63 @@
 <ion-view title="Play">
   <ion-content class="padding">
-    <div ng-controller="PlayCtrl">
-      <div class="play-holder">
-        <div class="top-of-play">
-          <div class="row">
-            <div class="col attempt-digit-holder" ng-repeat="num in maxNumbers">
-              <i class="icon ion-arrow-up-b change-number add-icon-{{num.index}}" ng-click="addNumber(num.index)"></i>
-              <div class="attempt-digit digit-{{num.index}} number-input">
-                {{num.index + 1}}
-              </div>
-              <!-- <input class="number-input" type="number" data-index="{{num.index}}"> -->
-              <i class="icon ion-arrow-down-b change-number subtract-icon-{{num.index}}" ng-click="subtractNumber(num.index)"></i>
+    <div class="play-holder">
+      <div class="top-of-play">
+        <div class="row">
+          <div class="col attempt-digit-holder" ng-repeat="num in maxNumbers">
+            <i class="icon ion-arrow-up-b change-number add-icon-{{num.index}}" ng-click="addNumber(num.index)"></i>
+            <div class="attempt-digit digit-{{num.index}} number-input">
+              {{num.index + 1}}
             </div>
+            <i class="icon ion-arrow-down-b change-number subtract-icon-{{num.index}}" ng-click="subtractNumber(num.index)"></i>
           </div>
         </div>
+      </div>
 
-        <div class="buttons-holder">
-          <button class="button button-small button-energized guess-button" ng-click="checkAnswer()" ng-show="!showRestart">
-            Guess
-          </button>
-          <div ng-show="showTimer">
-            <timer interval="1000">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
-          </div>
-          <div>
-            <button class="button button-clear button-assertive button-small give-up-button" ng-click="showConfirm()" ng-show="!showRestart">
-              Give up
-            </button>
-          </div>
-        </div>
-
-        <div class="row attempts-header-row">
-          <div class="col col-10 col-offset-20">
-            #
-          </div>
-          <div class="col col-30">
-            Guess
-          </div>
-          <div class="col col-15">
-            Result
-          </div>
-        </div>
-
-        <div class="row" ng-repeat="attempt in attempts">
-          <div class="col col-10 col-offset-20">
-            {{$index + 1}}
-          </div>
-          <div class="col col-30">
-            {{attempt.guess}}
-          </div>
-          <div class="col col-15">
-            {{attempt.result}}
-          </div>
-        </div>
-
-        <div class="bottom-of-play" ng-show="showRestart">
-          <p>
-            {{"Answer: " + finalAnswer}}
-          </p>
-          <button class="button button-positive icon ion-refresh" ng-click="restartGame()">
-            Retry
+      <div class="buttons-holder">
+        <button class="button button-small button-energized guess-button" ng-click="checkAnswer()" ng-show="!showRestart">
+          Guess
+        </button>
+        <div>
+          <button class="button button-clear button-assertive button-small give-up-button" ng-click="showConfirm()" ng-show="!showRestart">
+            Give up
           </button>
         </div>
+      </div>
+
+      <div class="row attempts-header-row">
+        <div class="col col-10 col-offset-20">
+          #
+        </div>
+        <div class="col col-30">
+          Guess
+        </div>
+        <div class="col col-15">
+          Result
+        </div>
+      </div>
+
+      <div class="row" ng-repeat="attempt in attempts">
+        <div class="col col-10 col-offset-20">
+          {{$index + 1}}
+        </div>
+        <div class="col col-30">
+          {{attempt.guess}}
+        </div>
+        <div class="col col-15">
+          {{attempt.result}}
+        </div>
+      </div>
+
+      <div class="bottom-of-play" ng-show="showRestart">
+        <p>
+          {{"Answer: " + finalAnswer}}
+        </p>
+        <p>
+          {{time | millSecondsToTimeString}}
+        </p>
+        <button class="button button-positive icon ion-refresh" ng-click="restartGame()">
+          Retry
+        </button>
       </div>
     </div>
   </ion-content>
