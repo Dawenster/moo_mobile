@@ -19,7 +19,7 @@
           <button class="button button-small button-energized guess-button" ng-click="checkAnswer()" ng-show="!showRestart">
             Guess
           </button>
-          <div>
+          <div ng-show="showTimer">
             <timer interval="1000">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
           </div>
           <div>

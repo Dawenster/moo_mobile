@@ -3,6 +3,7 @@ var app = angular.module('starter.controllers', []);
 app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPopup, Answer) {
   $scope.showDetails = $rootScope.started;
   $scope.attempts = JSON.parse($localstorage.get('attempts'));
+  $scope.showTimer = JSON.parse($localstorage.get('data')).timer;
 
   var getNumber = function() {
     var max = JSON.parse($localstorage.get('data')).digit;
@@ -127,7 +128,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
 app.controller('RulesCtrl', function($scope) {
 })
 
-app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digits, Repeat) {
+app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digits, Repeat, Timer) {
   $scope.data = JSON.parse($localstorage.get('data'));
 
   $scope.$watch('data.digit', function(newValue, oldValue) {
@@ -142,6 +143,14 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
     $scope.repeat = Repeat[newValue];
     if (newValue != oldValue) {
       $scope.data.repeat = newValue;
+      updateAndRestart($scope.data);
+    }
+  });
+
+  $scope.$watch('data.timer', function(newValue, oldValue) {
+    $scope.timer = Timer[newValue];
+    if (newValue != oldValue) {
+      $scope.data.timer = newValue;
       updateAndRestart($scope.data);
     }
   });

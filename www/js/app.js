@@ -24,7 +24,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .run(function($rootScope, $localstorage, Answer) {
   var initialSettings = {
     "digit": 4,
-    "repeat": false
+    "repeat": false,
+    "timer": true
   }
   $localstorage.set('data', JSON.stringify(initialSettings));
 

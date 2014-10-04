@@ -82,11 +82,20 @@ app.factory("Digits", function() {
 
 app.factory("Repeat", function() {
   var Repeat = {
-    true: "True: This means digits can repeat, like 1122. This makes the game more challenging.",
-    false: "False: This means digits cannot repeat, like 1234."
+    true: "On: This means digits can repeat, like 1122. This makes the game more challenging.",
+    false: "Off: This means digits cannot repeat, like 1234."
   };
   
   return Repeat
+});
+
+app.factory("Timer", function() {
+  var Timer = {
+    true: "On: The timer is on by default, to stress you out.",
+    false: "Off: Ok, we'll chill out. But just so you know, we're still keeping track of time in the background."
+  };
+  
+  return Timer
 });
 
 app.factory('$localstorage', ['$window', function($window) {
