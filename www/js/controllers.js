@@ -18,11 +18,10 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
   $scope.addNumber = function(index) {
     var numHolder = document.getElementsByClassName('digit-' + index)[0];
     var num = parseInt(numHolder.innerHTML);
-    if (num != 9) {
+    if (num == 9) {
+      numHolder.innerHTML = 0;
+    } else {
       numHolder.innerHTML = num + 1;
-    }
-    if (num + 1 == 9) {
-      addGreyout("add", index);
     }
     if (num + 1 == 1) {
       removeGreyout("subtract", index);
@@ -32,11 +31,10 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
   $scope.subtractNumber = function(index) {
     var numHolder = document.getElementsByClassName('digit-' + index)[0];
     var num = parseInt(numHolder.innerHTML);
-    if (num != 0) {
+    if (num == 0) {
+      numHolder.innerHTML = 9;
+    } else {
       numHolder.innerHTML = num - 1;
-    }
-    if (num - 1 == 0) {
-      addGreyout("subtract", index);
     }
     if (num - 1 == 8) {
       removeGreyout("add", index);
