@@ -233,6 +233,11 @@ app.controller('HistoryCtrl', function($scope, $rootScope) {
   } else {
     $scope.showRecords = false;
   }
+
+  $scope.doRefresh = function() {
+    $scope.games = $rootScope.games;
+    $scope.$broadcast('scroll.refreshComplete');
+  };
 })
 
 .controller('HistoryDetailCtrl', function($scope, $stateParams, $rootScope) {

@@ -5,6 +5,8 @@
         Warning: Changing these settings will restart any game already in progress
       </div>
     </div>
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()" ng-show="showRecords">
+    </ion-refresher>
     <ion-list ng-show="showRecords">
       <ion-item ng-repeat="game in games" type="item-text-wrap" href="#/tab/history/{{game.id}}">
         <div class="game-answer">
