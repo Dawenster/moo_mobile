@@ -185,9 +185,6 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
         attempts: $scope.attempts
       }
     ).done(function (data) {
-      setTimeout(function () {
-        $rootScope.getAllGames();
-      }, 1000);
       console.log(data);
     }).fail(function() {
       console.log("I'm a failure...");
