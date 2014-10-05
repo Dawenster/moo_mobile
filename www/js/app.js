@@ -32,8 +32,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   $rootScope.games = [];
 
-  $rootScope.url = "http://localhost:3000/"
-  // $rootScope.url = "http://moo-game.herokuapp.com/"
+  // $rootScope.url = "http://localhost:3000/"
+  $rootScope.url = "http://moo-game.herokuapp.com/"
 
   $rootScope.newGame = function() {
     $localstorage.set('answerShown', JSON.stringify(false));
