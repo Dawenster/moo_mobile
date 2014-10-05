@@ -1,6 +1,6 @@
 var app = angular.module('starter.controllers', []);
 
-app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPopup, $cordovaDevice, $http, Answer) {
+app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPopup, $cordovaDevice, Answer) {
   $scope.attempts = JSON.parse($localstorage.get('attempts'));
   $scope.currentTimeElapsed = $rootScope.playTimeStart;
   $scope.holdingAdd = {}
@@ -226,5 +226,6 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
   }
 })
 
-app.controller('HistoryCtrl', function($scope) {
+app.controller('HistoryCtrl', function($scope, Games) {
+  $scope.games = Games
 });
