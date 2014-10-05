@@ -1,6 +1,6 @@
 var app = angular.module('starter.controllers', []);
 
-app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPopup, Answer) {
+app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPopup, $cordovaDevice, $http, Answer) {
   $scope.attempts = JSON.parse($localstorage.get('attempts'));
   $scope.currentTimeElapsed = $rootScope.playTimeStart;
   $scope.holdingAdd = {}
@@ -81,7 +81,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     icon.className = icon.className.replace(/\bgreyout\b/,'');
   }
 
-  $scope.checkAnswer = function() {    
+  $scope.checkAnswer = function() {
     var attempt = [];
     var inputs = document.getElementsByClassName("number-input");
 
@@ -96,6 +96,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
     if (feedback == "You win!") {
       endTime();
       showAnswer();
+      saveGameRecord("win");
     }
   }
 
@@ -109,6 +110,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
   $scope.giveUp = function() {
     endTime();
     showAnswer();
+    saveGameRecord("giveup");
   }
 
   var endTime = function() {
@@ -142,6 +144,53 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
       }
     });
   };
+
+  var getUserParams = function() {
+    var uuid = "";
+    var username = "Blah";
+    var platform = "";
+    try {
+      uuid = $cordovaDevice.getUUID();
+      platform = $cordovaDevice.getPlatform();
+      model = $cordovaDevice.getModel();
+    }
+    catch(err) {
+      uuid = "Testing"
+      platform = "Test platform"
+      model = "Test model"
+    }
+    return {
+      uuid: uuid,
+      username: username,
+      platform: platform,
+      model: model
+    }
+  }
+
+  var saveGameRecord = function(result) {
+    var userParams = getUserParams();
+    var data = JSON.parse($localstorage.get('data'));
+    // var url = 'http://localhost:3000/create_record';
+    var url = 'http://moo-game.herokuapp.com/create_record';
+
+    $.post(url,
+      {
+        user_params: userParams,
+        game_params: {
+          answer: $scope.finalAnswer,
+          result: result,
+          time: $scope.time,
+          digits: data.digit,
+          repeat: data.repeat
+        },
+        attempts: $scope.attempts
+      }
+    ).done(function (data) {
+      console.log(data);
+    }).fail(function() {
+      console.log("I'm a failure...");
+    });
+  }
 
   var answerShown = JSON.parse($localstorage.get('answerShown'));
   if (answerShown) {

@@ -1,7 +1,7 @@
 {
-  "name": "numberguess",
+  "name": "Moo",
   "version": "1.0.0",
-  "description": "numberGuess: An Ionic project",
+  "description": "Moo: A number guessing game",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
