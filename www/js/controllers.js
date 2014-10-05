@@ -147,7 +147,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
 
   var getUserParams = function() {
     var uuid = "";
-    var username = "Blah";
+    var username = "Shy person";
     var platform = "";
     try {
       uuid = $cordovaDevice.getUUID();
@@ -223,6 +223,76 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
     $localstorage.set('data', JSON.stringify(data));
     $rootScope.newGame();
   }
+
+  var getUserParams = function(username) {
+    var uuid = "";
+    var username = username || "Shy person";
+    var platform = "";
+    try {
+      uuid = $cordovaDevice.getUUID();
+      platform = $cordovaDevice.getPlatform();
+      model = $cordovaDevice.getModel();
+    }
+    catch(err) {
+      uuid = "Testing"
+      platform = "Test platform"
+      model = "Test model"
+    }
+    return {
+      uuid: uuid,
+      username: username,
+      platform: platform,
+      model: model
+    }
+  }
+
+  var getUUID = function() {
+    var uuid = "";
+    try {
+      uuid = $cordovaDevice.getUUID();
+    }
+    catch(err) {
+      uuid = "Testing"
+    }
+    return uuid
+  }
+
+  $scope.submitUsername = function(username) {
+    var userParams = getUserParams(username);
+    var url = $rootScope.url + 'update_username';
+
+    $.post(url,
+      {
+        user_params: userParams
+      }
+    ).done(function (data) {
+      console.log(data);
+    }).fail(function() {
+      console.log("I'm a failure...");
+    });
+  }
+
+  $scope.getUsername = function() {
+    var uuid = getUUID();
+    var url = $rootScope.url + 'get_username';
+
+    $.get(url,
+      {
+        uuid: uuid
+      }
+    ).done(function (result) {
+      if (result.username == "Shy person") {
+        $scope.username = ""
+      } else {
+        $scope.username = result.username
+      }
+      console.log(result);
+    }).fail(function() {
+      console.log("I'm a failure...");
+    });
+  }
+
+  $scope.getUsername();
 })
 
 app.controller('HistoryCtrl', function($scope, $rootScope, $ionicLoading, $cordovaDevice) {

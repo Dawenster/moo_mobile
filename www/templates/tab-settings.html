@@ -32,5 +32,21 @@
     <p class="settings-number-sentence">
       {{repeat}}
     </p>
+    <div class="settings-item-title settings-number-digits">
+      Username
+    </div>
+    <div class="list">
+      <div class="item-input-inset">
+        <label class="item-input-wrapper">
+          <input type="text" placeholder="Default: Shy person" ng-model="username">
+        </label>
+        <button class="button button-small button-positive" ng-click="submitUsername(username)">
+          Submit
+        </button>
+      </div>
+    </div>
+    <p class="settings-number-sentence">
+      This is to keep track of high scores. If you leave it blank your username will show up as "Shy person" on the global scoreboard.
+    </p>
   </ion-content>
 </ion-view>
