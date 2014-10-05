@@ -106,36 +106,6 @@ app.factory('$localstorage', ['$window', function($window) {
   }
 }])
 
-app.factory("Games", function() {
-  var Games = {}
-  var getUUID = function() {
-    var uuid = "";
-    try {
-      uuid = $cordovaDevice.getUUID();
-    }
-    catch(err) {
-      uuid = "Testing"
-    }
-    return uuid
-  }
-
-  var uuid = getUUID();
-  var url = 'http://localhost:3000/fetch_records';
-  // var url = 'http://moo-game.herokuapp.com/fetch_records';
-
-  $.get(url,
-    {
-      uuid: uuid
-    }
-  ).done(function (data) {
-    Games = data;
-  }).fail(function() {
-    console.log("I'm a failure...");
-  });
-  
-  return Games
-});
-
 app.filter('millSecondsToTimeString', function() {
   return function(millseconds) {
     var seconds = Math.floor(millseconds / 1000);
@@ -168,4 +138,23 @@ app.filter('millSecondsToClockDisplay', function() {
   }
 });
 
+app.filter('formattedResult', function() {
+  return function(result) {
+    if (result == "giveup") {
+      return "Gave up";
+    } else {
+      return "Won"
+    }
+  }
+});
+
+app.filter('formattedRepeat', function() {
+  return function(repeat) {
+    if (repeat == true) {
+      return "Yes";
+    } else {
+      return "No"
+    }
+  }
+});
 

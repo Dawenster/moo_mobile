@@ -170,8 +170,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
   var saveGameRecord = function(result) {
     var userParams = getUserParams();
     var data = JSON.parse($localstorage.get('data'));
-    // var url = 'http://localhost:3000/create_record';
-    var url = 'http://moo-game.herokuapp.com/create_record';
+    var url = $rootScope.url + 'create_record';
 
     $.post(url,
       {
@@ -186,6 +185,7 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
         attempts: $scope.attempts
       }
     ).done(function (data) {
+      $rootScope.getAllGames();
       console.log(data);
     }).fail(function() {
       console.log("I'm a failure...");
@@ -226,6 +226,36 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
   }
 })
 
-app.controller('HistoryCtrl', function($scope, Games) {
-  $scope.games = Games
+app.controller('HistoryCtrl', function($scope, $rootScope) {
+  $scope.games = $rootScope.games;
+})
+
+.controller('HistoryDetailCtrl', function($scope, $stateParams, $rootScope) {
+  var getGame = function(gameId) {
+    var index = null;
+    for (var i = 0; i < $rootScope.games.length; i++) {
+      if ($rootScope.games[i].id == gameId) {
+        index = i;
+      }
+    };
+    return $rootScope.games[index];
+  }
+  $scope.game = getGame($stateParams.gameId);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

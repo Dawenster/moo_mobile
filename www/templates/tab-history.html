@@ -1,5 +1,14 @@
 <ion-view title="History">
   <ion-content>
-    
+    <ion-list>
+      <ion-item ng-repeat="game in games" type="item-text-wrap" href="#/tab/history/{{game.id}}">
+        <div class="game-answer">
+          Answer: {{game.answer}}
+        </div>
+        <div class="game-details">
+          Result: {{game.result | formattedResult}} ⋅ Guesses: {{game.attempts.length}} ⋅ Repeat: {{game.repeat | formattedRepeat}}
+        </div>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

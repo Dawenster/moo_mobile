@@ -52,3 +52,13 @@
 .bottom-of-play {
   text-align: center;
 }
+
+.game-answer {
+  font-weight: bold;
+}
+
+.game-details {
+  /*font-style: italic;*/
+  font-size: 14px;
+  color: grey;
+}
