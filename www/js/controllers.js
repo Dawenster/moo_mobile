@@ -228,6 +228,11 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
 
 app.controller('HistoryCtrl', function($scope, $rootScope) {
   $scope.games = $rootScope.games;
+  if ($scope.games) {
+    $scope.showRecords = true;
+  } else {
+    $scope.showRecords = false;
+  }
 })
 
 .controller('HistoryDetailCtrl', function($scope, $stateParams, $rootScope) {

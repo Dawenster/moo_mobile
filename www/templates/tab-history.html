@@ -1,6 +1,11 @@
 <ion-view title="History">
   <ion-content>
-    <ion-list>
+    <div class="card" ng-show="!showRecords">
+      <div class="item item-text-wrap">
+        Warning: Changing these settings will restart any game already in progress
+      </div>
+    </div>
+    <ion-list ng-show="showRecords">
       <ion-item ng-repeat="game in games" type="item-text-wrap" href="#/tab/history/{{game.id}}">
         <div class="game-answer">
           Answer: {{game.answer}}
