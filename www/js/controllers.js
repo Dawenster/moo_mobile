@@ -185,7 +185,9 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
         attempts: $scope.attempts
       }
     ).done(function (data) {
-      $rootScope.getAllGames();
+      setTimeout(function () {
+        $rootScope.getAllGames();
+      }, 1000);
       console.log(data);
     }).fail(function() {
       console.log("I'm a failure...");
@@ -226,16 +228,55 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
   }
 })
 
-app.controller('HistoryCtrl', function($scope, $rootScope) {
-  $scope.games = $rootScope.games;
-  if ($scope.games) {
-    $scope.showRecords = true;
-  } else {
-    $scope.showRecords = false;
+app.controller('HistoryCtrl', function($scope, $rootScope, $ionicLoading, $cordovaDevice) {
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+
+  var getUUID = function() {
+    var uuid = "";
+    try {
+      uuid = $cordovaDevice.getUUID();
+    }
+    catch(err) {
+      uuid = "Testing"
+    }
+    return uuid
   }
 
+  $scope.getAllGames = function() {
+    var uuid = getUUID();
+    var url = $rootScope.url + "fetch_records";
+
+    $.get(url,
+      {
+        uuid: uuid
+      }
+    ).done(function (result) {
+      $scope.hide();
+      $scope.games = result.data;
+      $rootScope.games = $scope.games;
+      if ($scope.games) {
+        $scope.showRecords = true;
+      } else {
+        $scope.showRecords = false;
+      }
+    }).fail(function() {
+      console.log("I'm a failure...");
+    });
+  }
+
+  $scope.show();
+  $scope.getAllGames();
+
   $scope.doRefresh = function() {
-    $scope.games = $rootScope.games;
+    $scope.getAllGames();
     $scope.$broadcast('scroll.refreshComplete');
   };
 })

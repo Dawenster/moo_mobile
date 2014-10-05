@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   });
 })
 
-.run(function($rootScope, $localstorage, $ionicLoading, Answer) {
+.run(function($rootScope, $localstorage, Answer) {
   var initialSettings = {
     "digit": 4,
     "repeat": false,
@@ -29,6 +29,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   }
   $localstorage.set('data', JSON.stringify(initialSettings));
   $localstorage.set('answerShown', JSON.stringify(false));
+
+  $rootScope.games = [];
 
   // $rootScope.url = "http://localhost:3000/"
   $rootScope.url = "http://moo-game.herokuapp.com/"
@@ -44,46 +46,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $rootScope.playTimeStart = new Date();
   }
 
-
-  $rootScope.show = function() {
-    $ionicLoading.show({
-      template: 'Loading...'
-    });
-  };
-
-  $rootScope.hide = function(){
-    $ionicLoading.hide();
-  };
-
-  var getUUID = function() {
-    var uuid = "";
-    try {
-      uuid = $cordovaDevice.getUUID();
-    }
-    catch(err) {
-      uuid = "Testing"
-    }
-    return uuid
-  }
-
-  $rootScope.getAllGames = function() {
-    var uuid = getUUID();
-    var url = $rootScope.url + "fetch_records";
-
-    $.get(url,
-      {
-        uuid: uuid
-      }
-    ).done(function (result) {
-      $rootScope.hide();
-      $rootScope.games = result.data;
-    }).fail(function() {
-      console.log("I'm a failure...");
-    });
-  }
-
-  $rootScope.show();
-  $rootScope.getAllGames();
   $rootScope.newGame();
 })
 
