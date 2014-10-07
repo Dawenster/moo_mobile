@@ -44,16 +44,24 @@ app.factory("Answer", function($localstorage) {
     return countLetters(letters);
   }
 
-  var determineLetter = function(letter, answer, letterIndex) {
-    var foundIndex = answer.indexOf(letter)
-
-    if (foundIndex > -1) {
-      if (foundIndex == letterIndex) {
+  var determineLetter = function(numGuess, answer, numGuessIndex) {
+    var foundIndices = findIndices(answer, numGuess);
+    if (foundIndices.length > 0) {
+      var foundIndex = foundIndices.indexOf(numGuessIndex);
+      if (foundIndex > -1) {
         return "A";
       } else {
         return "B";
       }
     }
+  }
+
+  var findIndices = function(answer, numGuess) {
+    var indices = [];
+    for(var i=0; i < answer.length; i++) {
+      if (answer[i] === numGuess) indices.push(i);
+    }
+    return indices;
   }
 
   var countLetters = function(letters) {
