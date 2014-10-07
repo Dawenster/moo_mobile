@@ -1,5 +1,73 @@
 <ion-view title="Rules">
   <ion-content>
-    
+    <div class="rules-holder">
+      <h4>
+        Goal
+      </h4>
+      <p>
+        The goal of Moo is to guess a random number the game has generated. This number is defaulted to four digits, but you can adjust this in the Settings tab.
+      </p>
+      <h4>
+        Results
+      </h4>
+      <p>
+        Each time you make a guess, the game will give you a result. If you guess it correctly, it will say "You win!". If you guess it incorrectly, it will give you a hint using the letters "A" and "B".
+      </p>
+      <p>
+        An "A" means you have a right number in the right spot. A "B" means you have a right number in the wrong spot.
+      </p>
+      <h4>
+        Examples
+      </h4>
+      <p>
+        If the number is "2014" and you guessed "1234", the result will be "1A 2B". The "4" is a right number in the right spot. The "1" and "2" are right numbers, but in the wrong spots. The "3" isn't in the answer so no result is given for it. Note that answers can start with zero as well.
+      </p>
+      <h4>
+        More examples
+      </h4>
+      <p>
+        If the answer is 7890:
+      </p>
+      <p>
+        <div>
+          Guess: 1234 --> Response: 0A 0B
+        </div>
+        <div>
+          Guess: 5678 --> Response: 0A 2B
+        </div>
+        <div>
+          Guess: 7809 --> Response: 2A 2B
+        </div>
+        <div>
+          Guess: 8888 --> Response: 1A 3B
+        </div>
+      </p>
+      <h4>
+        Repeat that!
+      </h4>
+      <p>
+        In the settings, you can also allow repeated numbers, such as "1122". The rules for the result are the same. Below are some examples for your reference. Say the answer is "5567":
+      </p>
+      <p>
+        <div>
+          Guess: 1155 --> Response: 0A 2B
+        </div>
+        <div>
+          Guess: 2345 --> Response: 0A 1B
+        </div>
+        <div>
+          Guess: 4550 --> Response: 1A 1B
+        </div>
+        <div>
+          Guess: 5555 --> Response: 2A 2B
+        </div>
+      </p>
+      <h4>
+        Source
+      </h4>
+      <p>
+        You can also read the rules on <a ng-href="http://en.wikipedia.org/wiki/Bulls_and_cows">Wikipedia</a>. The game is called "<a ng-href="http://en.wikipedia.org/wiki/Bulls_and_cows">Bulls and cows</a>", and one of the first computer implementations of it was called "moo", hence the name of this game.
+      </p>
+    </div>
   </ion-content>
 </ion-view>

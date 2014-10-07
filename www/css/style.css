@@ -63,6 +63,10 @@
   color: grey;
 }
 
+.rules-holder {
+  margin: 15px;
+}
+
 .explain-score {
   margin: 10px 20px;
 }
