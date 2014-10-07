@@ -233,6 +233,8 @@ app.controller('ScoresCtrl', function($scope, $rootScope, $ionicLoading, $cordov
     ).done(function (result) {
       $scope.hide();
       $scope.score = result.score;
+      $scope.high_scores = result.high_scores;
+      $scope.fastest_by_digit = result.fastest_by_digit;
     }).fail(function() {
       console.log("I'm a failure...");
     });

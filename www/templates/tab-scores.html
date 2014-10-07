@@ -33,6 +33,13 @@
         </span>
       </div>
     </div>
-    
+    <div class="list">
+      <div class="item item-divider">
+        Moo high scores
+      </div>
+      <div class="item" href="#" ng-repeat="winner in high_scores">
+        {{winner.username}}: {{winner.score}}
+      </div>
+    </div>
   </ion-content>
 </ion-view>
