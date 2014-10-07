@@ -200,6 +200,76 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
 app.controller('RulesCtrl', function($scope) {
 })
 
+app.controller('ScoresCtrl', function($scope) {
+})
+
+
+app.controller('HistoryCtrl', function($scope, $rootScope, $ionicLoading, $cordovaDevice) {
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+
+  var getUUID = function() {
+    var uuid = "";
+    try {
+      uuid = $cordovaDevice.getUUID();
+    }
+    catch(err) {
+      uuid = "Testing"
+    }
+    return uuid
+  }
+
+  $scope.getAllGames = function() {
+    var uuid = getUUID();
+    var url = $rootScope.url + "fetch_records";
+
+    $.get(url,
+      {
+        uuid: uuid
+      }
+    ).done(function (result) {
+      $scope.hide();
+      $scope.games = result.data;
+      $rootScope.games = $scope.games;
+      if ($scope.games) {
+        $scope.showRecords = true;
+      } else {
+        $scope.showRecords = false;
+      }
+    }).fail(function() {
+      console.log("I'm a failure...");
+    });
+  }
+
+  $scope.show();
+  $scope.getAllGames();
+
+  $scope.doRefresh = function() {
+    $scope.getAllGames();
+    $scope.$broadcast('scroll.refreshComplete');
+  };
+})
+
+.controller('HistoryDetailCtrl', function($scope, $stateParams, $rootScope) {
+  var getGame = function(gameId) {
+    var index = null;
+    for (var i = 0; i < $rootScope.games.length; i++) {
+      if ($rootScope.games[i].id == gameId) {
+        index = i;
+      }
+    };
+    return $rootScope.games[index];
+  }
+  $scope.game = getGame($stateParams.gameId);
+})
+
 app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digits, Repeat) {
   $scope.data = JSON.parse($localstorage.get('data'));
 
@@ -293,74 +363,7 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
   }
 
   $scope.getUsername();
-})
-
-app.controller('HistoryCtrl', function($scope, $rootScope, $ionicLoading, $cordovaDevice) {
-  $scope.show = function() {
-    $ionicLoading.show({
-      template: 'Loading...'
-    });
-  };
-
-  $scope.hide = function(){
-    $ionicLoading.hide();
-  };
-
-  var getUUID = function() {
-    var uuid = "";
-    try {
-      uuid = $cordovaDevice.getUUID();
-    }
-    catch(err) {
-      uuid = "Testing"
-    }
-    return uuid
-  }
-
-  $scope.getAllGames = function() {
-    var uuid = getUUID();
-    var url = $rootScope.url + "fetch_records";
-
-    $.get(url,
-      {
-        uuid: uuid
-      }
-    ).done(function (result) {
-      $scope.hide();
-      $scope.games = result.data;
-      $rootScope.games = $scope.games;
-      if ($scope.games) {
-        $scope.showRecords = true;
-      } else {
-        $scope.showRecords = false;
-      }
-    }).fail(function() {
-      console.log("I'm a failure...");
-    });
-  }
-
-  $scope.show();
-  $scope.getAllGames();
-
-  $scope.doRefresh = function() {
-    $scope.getAllGames();
-    $scope.$broadcast('scroll.refreshComplete');
-  };
-})
-
-.controller('HistoryDetailCtrl', function($scope, $stateParams, $rootScope) {
-  var getGame = function(gameId) {
-    var index = null;
-    for (var i = 0; i < $rootScope.games.length; i++) {
-      if ($rootScope.games[i].id == gameId) {
-        index = i;
-      }
-    };
-    return $rootScope.games[index];
-  }
-  $scope.game = getGame($stateParams.gameId);
 });
-
 
 
 

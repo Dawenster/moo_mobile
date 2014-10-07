@@ -86,12 +86,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     })
 
-    .state('tab.settings', {
-      url: '/settings',
+    .state('tab.scores', {
+      url: '/scores',
       views: {
-        'tab-settings': {
-          templateUrl: 'templates/tab-settings.html',
-          controller: 'SettingsCtrl'
+        'tab-scores': {
+          templateUrl: 'templates/tab-scores.html',
+          controller: 'ScoresCtrl'
         }
       }
     })
@@ -114,8 +114,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'HistoryDetailCtrl'
         }
       }
-    });
+    })
 
+    .state('tab.settings', {
+      url: '/settings',
+      views: {
+        'tab-settings': {
+          templateUrl: 'templates/tab-settings.html',
+          controller: 'SettingsCtrl'
+        }
+      }
+    });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/play');
 
