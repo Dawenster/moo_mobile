@@ -84,6 +84,11 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
   $scope.checkAnswer = function() {
     var attempt = [];
     var inputs = document.getElementsByClassName("number-input");
+    var attempts = JSON.parse($localstorage.get('attempts'));
+
+    if(attempts.length == 0) {
+      $rootScope.startOffPlayTime();
+    }
 
     for (var i = 0; i < inputs.length; i++) {
       attempt.push(parseInt(inputs[i].innerHTML));

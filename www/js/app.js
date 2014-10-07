@@ -39,10 +39,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     $localstorage.set('answerShown', JSON.stringify(false));
     $localstorage.set('attempts', JSON.stringify([]));
     Answer.generate();
-    startOffPlayTime();
   }
 
-  var startOffPlayTime = function() {
+  $rootScope.startOffPlayTime = function() {
     $rootScope.playTimeStart = new Date();
   }
 
