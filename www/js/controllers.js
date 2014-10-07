@@ -198,6 +198,10 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
 });
 
 app.controller('RulesCtrl', function($scope) {
+  $scope.goToWiki = function() {
+    var ref = window.open('http://en.wikipedia.org/wiki/Bulls_and_cows', '_blank', 'location=yes');
+    ref.addEventListener('loadstart', function() { alert(event.url); });
+  }
 })
 
 app.controller('ScoresCtrl', function($scope, $rootScope, $ionicLoading, $cordovaDevice, $ionicPopover) {
