@@ -24,7 +24,7 @@
       <div class="item item-text-wrap">
         Your score: 
         <span style="font-weight: bold;">
-          {{score}}
+          {{score | number}}
         </span>
         <span style="float: right; font-style: italic; font-size: 12px;">
           <a ng-click="openPopover($event)">
@@ -38,7 +38,7 @@
         Moo high scores
       </div>
       <div class="item" href="#" ng-repeat="winner in high_scores">
-        {{winner.username}}: {{winner.score}}
+        {{winner.username}}: {{winner.score | number}}
       </div>
     </div>
     <div class="list" ng-repeat="fastest in fastest_by_digit">
