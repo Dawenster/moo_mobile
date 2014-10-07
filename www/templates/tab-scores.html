@@ -1,5 +1,38 @@
 <ion-view title="Scores">
   <ion-content>
+    <script id="score-popover.html" type="text/ng-template">
+      <ion-popover-view>
+        <ion-header-bar>
+          <h1 class="title">Our messed up scoring</h1>
+        </ion-header-bar>
+        <ion-content>
+          <div class="explain-score">
+            <p>
+              Scores are calculated by adding up all the numbers you have guessed correctly.
+            </p>
+            <p>
+              Yes, this means that for a four-digit number (non-repeat) you could be screwed and end up with a low number like 0123, which would only give you 123 points. Or you could get lucky and get 9876. We like to think of this randomness as part of the fun.
+            </p>
+            <p>
+              This also encourages you to go for the higher-digit games, which should give you more points.
+            </p>
+          </div>
+        </ion-content>
+      </ion-popover-view>
+    </script>
+    <div class="card">
+      <div class="item item-text-wrap">
+        Your score: 
+        <span style="font-weight: bold;">
+          {{score}}
+        </span>
+        <span style="float: right; font-style: italic; font-size: 12px;">
+          <a ng-click="openPopover($event)">
+            Explain
+          </a>
+        </span>
+      </div>
+    </div>
     
   </ion-content>
 </ion-view>

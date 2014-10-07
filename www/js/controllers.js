@@ -200,7 +200,70 @@ app.controller('PlayCtrl', function($scope, $rootScope, $localstorage, $ionicPop
 app.controller('RulesCtrl', function($scope) {
 })
 
-app.controller('ScoresCtrl', function($scope) {
+app.controller('ScoresCtrl', function($scope, $rootScope, $ionicLoading, $cordovaDevice, $ionicPopover) {
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+
+  var getUUID = function() {
+    var uuid = "";
+    try {
+      uuid = $cordovaDevice.getUUID();
+    }
+    catch(err) {
+      uuid = "Testing"
+    }
+    return uuid
+  }
+
+  $scope.getScore = function() {
+    var uuid = getUUID();
+    var url = $rootScope.url + "get_score";
+
+    $.get(url,
+      {
+        uuid: uuid
+      }
+    ).done(function (result) {
+      $scope.hide();
+      $scope.score = result.score;
+    }).fail(function() {
+      console.log("I'm a failure...");
+    });
+  }
+
+  $scope.show();
+  $scope.getScore();
+
+  $ionicPopover.fromTemplateUrl('score-popover.html', {
+    scope: $scope,
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
+  $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+  };
+  $scope.closePopover = function() {
+    $scope.popover.hide();
+  };
+  //Cleanup the popover when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.popover.remove();
+  });
+  // Execute action on hide popover
+  $scope.$on('popover.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove popover
+  $scope.$on('popover.removed', function() {
+    // Execute action
+  });
 })
 
 
