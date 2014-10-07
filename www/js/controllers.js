@@ -343,8 +343,18 @@ app.controller('HistoryCtrl', function($scope, $rootScope, $ionicLoading, $cordo
   $scope.game = getGame($stateParams.gameId);
 })
 
-app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digits, Repeat) {
+app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, $ionicLoading, Digits, Repeat) {
   $scope.data = JSON.parse($localstorage.get('data'));
+
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
 
   $scope.$watch('data.digit', function(newValue, oldValue) {
     $scope.sentence = Digits[newValue];
@@ -428,6 +438,7 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
         $scope.username = ""
       } else {
         $scope.username = result.username
+        $scope.hide();
       }
       console.log(result);
     }).fail(function() {
@@ -435,6 +446,7 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, Digit
     });
   }
 
+  $scope.show();
   $scope.getUsername();
 });
 
