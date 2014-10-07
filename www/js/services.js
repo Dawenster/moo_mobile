@@ -138,6 +138,16 @@ app.filter('millSecondsToClockDisplay', function() {
   }
 });
 
+app.filter('pluralizeDigits', function() {
+  return function(digit) {
+    if (digit == 1) {
+      return digit + " digit"
+    } else {
+      return digit + " digits"
+    }
+  }
+});
+
 app.filter('formattedResult', function() {
   return function(result) {
     if (result == "giveup") {

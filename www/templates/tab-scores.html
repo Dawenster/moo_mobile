@@ -41,5 +41,18 @@
         {{winner.username}}: {{winner.score}}
       </div>
     </div>
+    <div class="list" ng-repeat="fastest in fastest_by_digit">
+      <div class="item item-divider">
+        Fastest for {{fastest.digit | pluralizeDigits}}
+      </div>
+      <div class="item" href="#" ng-repeat="record in fastest.array">
+        <div>
+          {{record.time | millSecondsToTimeString}}
+        </div>
+        <div style="font-style: italic; font-size: 14px; color: grey;">
+          User: {{record.username}}, Answer: {{record.answer}}
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
