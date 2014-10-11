@@ -343,7 +343,7 @@ app.controller('HistoryCtrl', function($scope, $rootScope, $ionicLoading, $cordo
   $scope.game = getGame($stateParams.gameId);
 })
 
-app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, $ionicLoading, Digits, Repeat) {
+app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, $ionicLoading, $cordovaDevice, Digits, Repeat) {
   $scope.data = JSON.parse($localstorage.get('data'));
 
   $scope.show = function() {
