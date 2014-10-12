@@ -438,8 +438,8 @@ app.controller('SettingsCtrl', function($scope, $rootScope, $localstorage, $ioni
         $scope.username = ""
       } else {
         $scope.username = result.username
-        $scope.hide();
       }
+      $scope.hide();
       console.log(result);
     }).fail(function() {
       console.log("I'm a failure...");
